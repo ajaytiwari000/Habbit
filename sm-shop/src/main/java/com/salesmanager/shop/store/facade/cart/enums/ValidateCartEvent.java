@@ -1,0 +1,15 @@
+package com.salesmanager.shop.store.facade.cart.enums;
+
+public enum ValidateCartEvent {
+  GO_TO_CART,
+  INCREMENT_QTY_COUPON,
+  INCREMENT_QTY_REWARD,
+  INCREMENT_QTY_NONE,
+  DECREMENT_QTY_COUPON,
+  DECREMENT_QTY_REWARD,
+  DECREMENT_QTY_NONE,
+  REMOVE_COUPON,
+  REMOVE_REWARD,
+  APPLY_COUPON,
+  APPLY_REWARD
+}

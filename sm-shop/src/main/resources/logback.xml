@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="LOG_PATTERN" value="%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %X{correlationId} [%-5level] %class{0} - %msg%n" />
+	<property name="APP_LOG_ROOT" value="/habbit"/>
+
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+
+	<appender name="AppInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${APP_LOG_ROOT}/habbit-logs/habbit-info_%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="AppDebugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${APP_LOG_ROOT}/habbit-logs/habbit-debug_%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			<totalSizeCap>1024MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="AppErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${APP_LOG_ROOT}/habbit-logs/habbit-error_%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			<totalSizeCap>1024MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<!-- LOG everything at Debug level -->
+	<root level="debug">
+		<appender-ref ref="Console" />
+		<appender-ref ref="AppInfoLog" />
+		<appender-ref ref="AppDebugLog" />
+		<appender-ref ref="AppErrorLog" />
+	</root>
+
+	<!-- Add Service or class level logger overrides over here or in application.properties -->
+</configuration>
